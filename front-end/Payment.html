@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago de Servicios</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        form { display: grid; gap: 15px; }
+        input, select, textarea { padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 15px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #45a049; }
+        .card-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        #responseMessage { margin-top: 20px; padding: 10px; border-radius: 4px; }
+        .success { background: #dff0d8; color: #3c763d; }
+        .error { background: #f2dede; color: #a94442; }
+    </style>
+</head>
+<body>
+    <h1>Pago de Servicios</h1>
+    <form id="paymentForm">
+        <label for="service">Servicio:</label>
+        <select id="service" required>
+            <option value="">Seleccione un servicio</option>
+            <option value="web_design">Diseño Web ($500)</option>
+            <option value="seo">SEO ($300/mes)</option>
+            <option value="hosting">Hosting ($100/mes)</option>
+        </select>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" required>
+
+        <label for="card_holder">Nombre en la tarjeta:</label>
+        <input type="text" id="card_holder" required>
+
+        <label for="card_number">Número de tarjeta:</label>
+        <input type="text" id="card_number" pattern="[0-9]{13,16}" required>
+
+        <div class="card-details">
+            <div>
+                <label for="expiry_month">Mes de expiración:</label>
+                <input type="number" id="expiry_month" min="1" max="12" placeholder="MM" required>
+            </div>
+            <div>
+                <label for="expiry_year">Año de expiración:</label>
+                <input type="number" id="expiry_year" min="2023" placeholder="AAAA" required>
+            </div>
+            <div>
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" pattern="[0-9]{3,4}" required>
+            </div>
+            <div>
+                <label for="amount">Monto:</label>
+                <input type="number" id="amount" min="0.01" step="0.01" required>
+            </div>
+        </div>
+
+        <label for="currency">Moneda:</label>
+        <select id="currency" required>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="MXN">MXN ($)</option>
+        </select>
+
+        <button type="submit">Realizar Pago</button>
+    </form>
+    <div id="responseMessage"></div>
+    <script src="payment.js"></script>
+</body>
+</html>
